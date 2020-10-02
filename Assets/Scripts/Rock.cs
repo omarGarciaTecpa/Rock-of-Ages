@@ -9,8 +9,11 @@ public class Rock : MonoBehaviour
     void Start()
     {
         // apply impulse force to get game object moving
-        const float MinImpulseForce = 3f;
-        const float MaxImpulseForce = 6f;
+        const float MinImpulseForce = 1f;
+        const float MaxImpulseForce = 2f;
+
+        //Position object relative to camera view
+        CenterToCamera();
 
         //Create a random angle 
         float angle = Random.Range(0, 2 * Mathf.PI);
@@ -25,6 +28,13 @@ public class Rock : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(
             direction * magnitude,
             ForceMode2D.Impulse);
+    }
+
+
+    void CenterToCamera() {
+        Vector3 location = new Vector3(Screen.width / 2, Screen.height / 2, -Camera.main.transform.position.z);
+        Vector3 worldLocation = Camera.main.ScreenToWorldPoint(location);
+        transform.position = worldLocation;
     }
 
     // Destroy the rock if out of sight
