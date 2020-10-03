@@ -18,7 +18,7 @@ public class RockSpawner : MonoBehaviour
     Timer spawnTimer;
 
     [SerializeField]
-    float spawnSeconds;
+    float spawnSeconds = 0f;
 
 
     // Start is called before the first frame update
@@ -37,8 +37,27 @@ public class RockSpawner : MonoBehaviour
     {
         if (spawnTimer.Finished) {
             //Spawner time is finished
-            print("Time is up, restarting");
+            SpawnRock();     
             spawnTimer.Run();
         }
+    }
+
+
+    void SpawnRock() {
+
+        //Spawn a new Rock
+        GameObject rock = Instantiate(rockPrefab) as GameObject;
+
+        //Get prefab renderer
+        SpriteRenderer renderer = rock.GetComponent<SpriteRenderer>();
+
+        //Random 
+        if (sprites.Count > 0) {
+            int spriteIndex = UnityEngine.Random.Range(0, sprites.Count);
+            print(spriteIndex);
+            renderer.sprite = sprites[spriteIndex];
+        }
+
+
     }
 }
