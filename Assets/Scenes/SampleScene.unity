@@ -224,3 +224,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bf9089f177185ca4da805d28f98451e2, type: 3}
   - {fileID: 21300000, guid: c744d46a171894149b0edceeeed25859, type: 3}
   spawnSeconds: 1
+  rockAmount: 3

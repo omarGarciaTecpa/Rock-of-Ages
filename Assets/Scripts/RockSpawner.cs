@@ -15,10 +15,19 @@ public class RockSpawner : MonoBehaviour
     [SerializeField]
     List<Sprite> sprites;
 
+
     Timer spawnTimer;
 
+    //Seconds before the next spawn
     [SerializeField]
     float spawnSeconds = 0f;
+
+    //Rocks to be created
+    [SerializeField]
+    int rockAmount = 0;
+
+    //Keep Track of rocks in the scene
+    private int rocksInScene = 0;
 
 
     // Start is called before the first frame update
@@ -35,8 +44,11 @@ public class RockSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (spawnTimer.Finished) {
+        rocksInScene = GameObject.FindGameObjectsWithTag("GameRock").Length;
+
+        if (spawnTimer.Finished &&  rocksInScene < rockAmount) {
             //Spawner time is finished
+            
             SpawnRock();     
             spawnTimer.Run();
         }
@@ -54,7 +66,6 @@ public class RockSpawner : MonoBehaviour
         //Random 
         if (sprites.Count > 0) {
             int spriteIndex = UnityEngine.Random.Range(0, sprites.Count);
-            print(spriteIndex);
             renderer.sprite = sprites[spriteIndex];
         }
 
